@@ -1,4 +1,4 @@
-let emojis = ["😀", "😃", "😄", "😁", "😆", "😅", "😂", "🤣", "😊", "😇"];
+let emojis = ["😀", "😒", "😄", "😁", "😆", "😅", "😂", "🤣", "😊", "😇"];
 emojis = emojis.concat(emojis);
 emojis.sort(() => Math.random() - 0.5);
 
@@ -38,20 +38,18 @@ function manejarClickCelda(event) {
     if (emojiSeleccionado === null) {
         emojiSeleccionado = emoji;
         celdaSeleccionada = celda;
+    } else if (emojiSeleccionado === emoji && celdaSeleccionada !== celda) {
+        emojiSeleccionado = null;
+        celdaSeleccionada = null;
     } else {
-        if (emojiSeleccionado === emoji && celdaSeleccionada !== celda) {
-            console.log('¡Has encontrado un par!');
+        setTimeout(() => {
+            celda.classList.remove('volteada');
+            celdaSeleccionada.classList.remove('volteada');
+            celda.textContent = '';
+            celdaSeleccionada.textContent = '';
             emojiSeleccionado = null;
             celdaSeleccionada = null;
-        } else {
-            setTimeout(() => {
-                celda.classList.remove('volteada');
-                celdaSeleccionada.classList.remove('volteada');
-                celda.textContent = '';
-                celdaSeleccionada.textContent = '';
-                emojiSeleccionado = null;
-                celdaSeleccionada = null;
-            }, 500);
-        }
+        }, 500);
     }
 }
+
